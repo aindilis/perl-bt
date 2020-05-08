@@ -1,0 +1,7 @@
+#!/usr/bin/perl -w
+
+use FRDCSA::BehaviorTree;
+
+my $behaviortree = FRDCSA::BehaviorTree->new();
+
+$behaviortree->Start();
