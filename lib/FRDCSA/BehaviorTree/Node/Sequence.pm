@@ -9,17 +9,13 @@ use Class::MethodMaker
   get_set       =>
   [
 
-   qw / Attribute /
+   qw / Children /
 
   ];
 
 sub init {
   my ($self,%args) = @_;
-  $self->Attribute($args{Attribute} || "");
-}
-
-sub Method {
-  my ($self,%args) = @_;
+  $self->Children($args{Children} || []);
 }
 
 1;

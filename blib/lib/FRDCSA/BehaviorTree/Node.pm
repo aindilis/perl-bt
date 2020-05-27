@@ -1,4 +1,4 @@
-package FRDCSA::BehaviorTree::Node::Selector;
+package FRDCSA::BehaviorTree::Node;
 
 use Data::Dumper;
 
@@ -7,7 +7,7 @@ use Class::MethodMaker
   get_set       =>
   [
 
-   qw / Name Parent Children /
+   qw / Name Description Parent Children /
 
   ];
 
@@ -16,6 +16,7 @@ sub init {
   my $ref = ref($self);
   $ref =~ s/.*:://;
   $self->Name($args{Name} || $ref.'-'.rand());
+  $self->Description($args{Description} || '');
   $self->Parent($args{Parent});
   $self->Children($args{Children});
 }

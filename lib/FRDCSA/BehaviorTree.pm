@@ -7,19 +7,23 @@ use Class::MethodMaker
   get_set       =>
   [
 
-   qw / /
+   qw / Name SourceFileName Root /
 
   ];
 
 sub init {
   my ($self,%args) = @_;
+  print "What?\n";
+  $self->Name($args{Name} || 'BehaviorTree-'.rand());
+  $self->SourceFileName($args{SourceFileName});
+  if (-f $self->SourceFileName) {
+    $self->LoadFromSource();
+  } else {
+    $self->Root($args{Root});
+  }
 }
 
-sub Start {
-  my ($self,%args) = @_;
-}
-
-sub Stop {
+sub LoadFromSource {
   my ($self,%args) = @_;
 }
 

@@ -15,7 +15,8 @@ use Class::MethodMaker
 
 sub init {
   my ($self,%args) = @_;
-  $self->Children([]);
+  $self->SUPER::init(%args);
+  $self->Children(undef);
 }
 
 sub Method {
