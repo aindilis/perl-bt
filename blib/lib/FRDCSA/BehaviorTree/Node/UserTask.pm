@@ -26,7 +26,7 @@ sub Tick {
   # to proceed
 
   my $result = $self->SUPER::Tick(%args);
-  $self->Update(Update => 'Please start task: '.$self->Description);
+  $self->Update(Update => 'JSON: Please start task: '.$self->Description);
   return $result;
 }
 
