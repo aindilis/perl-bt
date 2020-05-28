@@ -9,17 +9,33 @@ use Class::MethodMaker
   get_set       =>
   [
 
-   qw / Attribute /
+   qw / /
 
   ];
 
 sub init {
   my ($self,%args) = @_;
-  $self->Attribute($args{Attribute} || "");
+  $self->SUPER::init(%args);
 }
 
-sub Method {
+sub Tick {
   my ($self,%args) = @_;
+  $self->SUPER::Tick(%args);
+  foreach my $child (@{$self->Children}) {
+    my $childstatus = $child->Tick();
+    if ($childstatus->{Status} eq 'running') {
+      return {
+	      Status => 'running',
+	     };
+    } elsif ($childstatus->{Status} eq 'success') {
+      return {
+	      Status => 'success',
+	     };
+    }
+  }
+  return {
+	  Status => 'failure',
+	 };
 }
 
 1;

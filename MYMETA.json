@@ -1,18 +1,18 @@
 {
-   "abstract" : "Pure Perl Behavior Tree implementation",
+   "abstract" : "unknown",
    "author" : [
-      "Andrew John Dougherty <adougher9@gmail.com>"
+      "unknown"
    ],
    "dynamic_config" : 0,
    "generated_by" : "ExtUtils::MakeMaker version 7.44, CPAN::Meta::Converter version 2.150010",
    "license" : [
-      "gpl_3"
+      "unknown"
    ],
    "meta-spec" : {
       "url" : "http://search.cpan.org/perldoc?CPAN::Meta::Spec",
       "version" : 2
    },
-   "name" : "FRDCSA-BehaviorTree",
+   "name" : "perl-bt",
    "no_index" : {
       "directory" : [
          "t",
@@ -32,17 +32,11 @@
       },
       "runtime" : {
          "requires" : {
-            "Class::MethodMaker" : "2.24",
-            "Data::Dumper" : "2.17"
-         }
-      },
-      "test" : {
-         "requires" : {
-            "Test::More" : "1.001014"
+            "Mojolicious" : "8.40"
          }
       }
    },
    "release_status" : "stable",
-   "version" : "0",
+   "version" : "0.01",
    "x_serialization_backend" : "JSON::PP version 4.04"
 }

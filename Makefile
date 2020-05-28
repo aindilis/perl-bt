@@ -1,4 +1,4 @@
-# This Makefile is for the FRDCSA::BehaviorTree extension to perl.
+# This Makefile is for the perl-bt extension to perl.
 #
 # It was generated automatically by MakeMaker version
 # 7.44 (Revision: 74400) from the contents of
@@ -11,16 +11,12 @@
 
 #   MakeMaker Parameters:
 
-#     ABSTRACT => q[Pure Perl Behavior Tree implementation]
-#     AUTHOR => [q[Andrew John Dougherty <adougher9@gmail.com>]]
 #     BUILD_REQUIRES => {  }
 #     CONFIGURE_REQUIRES => {  }
-#     LICENSE => q[gpl_3]
-#     NAME => q[FRDCSA::BehaviorTree]
-#     PL_FILES => {  }
-#     PREREQ_PM => { Class::MethodMaker=>q[2.24], Data::Dumper=>q[2.17], Test::More=>q[1.001014] }
-#     TEST_REQUIRES => { Test::More=>q[1.001014] }
-#     VERSION_FROM => q[lib/FRDCSA/BehaviorTree.pm]
+#     PREREQ_PM => { Mojolicious=>q[8.40] }
+#     TEST_REQUIRES => {  }
+#     VERSION => q[0.01]
+#     test => { TESTS=>q[t/*.t] }
 
 # --- MakeMaker post_initialize section:
 
@@ -57,13 +53,13 @@ VENDORLIBEXP = /usr/share/perl5
 AR_STATIC_ARGS = cr
 DIRFILESEP = /
 DFSEP = $(DIRFILESEP)
-NAME = FRDCSA::BehaviorTree
-NAME_SYM = FRDCSA_BehaviorTree
-VERSION = 0
+NAME = perl-bt
+NAME_SYM = perl_bt
+VERSION = 0.01
 VERSION_MACRO = VERSION
-VERSION_SYM = 0
+VERSION_SYM = 0_01
 DEFINE_VERSION = -D$(VERSION_MACRO)=\"$(VERSION)\"
-XS_VERSION = 0
+XS_VERSION = 0.01
 XS_VERSION_MACRO = XS_VERSION
 XS_DEFINE_VERSION = -D$(XS_VERSION_MACRO)=\"$(XS_VERSION)\"
 INST_ARCHLIB = blib/arch
@@ -151,11 +147,11 @@ MM_REVISION = 74400
 # PARENT_NAME = NAME without BASEEXT and no trailing :: (eg Foo::Bar)
 # DLBASE  = Basename part of dynamic library. May be just equal BASEEXT.
 MAKE = make
-FULLEXT = FRDCSA/BehaviorTree
-BASEEXT = BehaviorTree
-PARENT_NAME = FRDCSA
+FULLEXT = perl-bt
+BASEEXT = bt
+PARENT_NAME = 
 DLBASE = $(BASEEXT)
-VERSION_FROM = lib/FRDCSA/BehaviorTree.pm
+VERSION_FROM = 
 OBJECT = 
 LDFROM = $(OBJECT)
 LINKTYPE = dynamic
@@ -173,8 +169,8 @@ MAN3PODS =
 CONFIGDEP = $(PERL_ARCHLIBDEP)$(DFSEP)Config.pm $(PERL_INCDEP)$(DFSEP)config.h
 
 # Where to build things
-INST_LIBDIR      = $(INST_LIB)/FRDCSA
-INST_ARCHLIBDIR  = $(INST_ARCHLIB)/FRDCSA
+INST_LIBDIR      = $(INST_LIB)
+INST_ARCHLIBDIR  = $(INST_ARCHLIB)
 
 INST_AUTODIR     = $(INST_LIB)/auto/$(FULLEXT)
 INST_ARCHAUTODIR = $(INST_ARCHLIB)/auto/$(FULLEXT)
@@ -267,8 +263,8 @@ CI = ci -u
 RCS_LABEL = rcs -Nv$(VERSION_SYM): -q
 DIST_CP = best
 DIST_DEFAULT = tardist
-DISTNAME = FRDCSA-BehaviorTree
-DISTVNAME = FRDCSA-BehaviorTree-0
+DISTNAME = perl-bt
+DISTVNAME = perl-bt-0.01
 
 
 # --- MakeMaker macro section:
@@ -492,47 +488,45 @@ realclean purge :: realclean_subdirs
 metafile : create_distdir
 	$(NOECHO) $(ECHO) Generating META.yml
 	$(NOECHO) $(ECHO) '---' > META_new.yml
-	$(NOECHO) $(ECHO) 'abstract: '\''Pure Perl Behavior Tree implementation'\''' >> META_new.yml
+	$(NOECHO) $(ECHO) 'abstract: unknown' >> META_new.yml
 	$(NOECHO) $(ECHO) 'author:' >> META_new.yml
-	$(NOECHO) $(ECHO) '  - '\''Andrew John Dougherty <adougher9@gmail.com>'\''' >> META_new.yml
+	$(NOECHO) $(ECHO) '  - unknown' >> META_new.yml
 	$(NOECHO) $(ECHO) 'build_requires:' >> META_new.yml
 	$(NOECHO) $(ECHO) '  ExtUtils::MakeMaker: '\''0'\''' >> META_new.yml
-	$(NOECHO) $(ECHO) '  Test::More: '\''1.001014'\''' >> META_new.yml
 	$(NOECHO) $(ECHO) 'configure_requires:' >> META_new.yml
 	$(NOECHO) $(ECHO) '  ExtUtils::MakeMaker: '\''0'\''' >> META_new.yml
 	$(NOECHO) $(ECHO) 'dynamic_config: 1' >> META_new.yml
 	$(NOECHO) $(ECHO) 'generated_by: '\''ExtUtils::MakeMaker version 7.44, CPAN::Meta::Converter version 2.150010'\''' >> META_new.yml
-	$(NOECHO) $(ECHO) 'license: gpl' >> META_new.yml
+	$(NOECHO) $(ECHO) 'license: unknown' >> META_new.yml
 	$(NOECHO) $(ECHO) 'meta-spec:' >> META_new.yml
 	$(NOECHO) $(ECHO) '  url: http://module-build.sourceforge.net/META-spec-v1.4.html' >> META_new.yml
 	$(NOECHO) $(ECHO) '  version: '\''1.4'\''' >> META_new.yml
-	$(NOECHO) $(ECHO) 'name: FRDCSA-BehaviorTree' >> META_new.yml
+	$(NOECHO) $(ECHO) 'name: perl-bt' >> META_new.yml
 	$(NOECHO) $(ECHO) 'no_index:' >> META_new.yml
 	$(NOECHO) $(ECHO) '  directory:' >> META_new.yml
 	$(NOECHO) $(ECHO) '    - t' >> META_new.yml
 	$(NOECHO) $(ECHO) '    - inc' >> META_new.yml
 	$(NOECHO) $(ECHO) 'requires:' >> META_new.yml
-	$(NOECHO) $(ECHO) '  Class::MethodMaker: '\''2.24'\''' >> META_new.yml
-	$(NOECHO) $(ECHO) '  Data::Dumper: '\''2.17'\''' >> META_new.yml
-	$(NOECHO) $(ECHO) 'version: '\''0'\''' >> META_new.yml
+	$(NOECHO) $(ECHO) '  Mojolicious: '\''8.40'\''' >> META_new.yml
+	$(NOECHO) $(ECHO) 'version: '\''0.01'\''' >> META_new.yml
 	$(NOECHO) $(ECHO) 'x_serialization_backend: '\''CPAN::Meta::YAML version 0.018'\''' >> META_new.yml
 	-$(NOECHO) $(MV) META_new.yml $(DISTVNAME)/META.yml
 	$(NOECHO) $(ECHO) Generating META.json
 	$(NOECHO) $(ECHO) '{' > META_new.json
-	$(NOECHO) $(ECHO) '   "abstract" : "Pure Perl Behavior Tree implementation",' >> META_new.json
+	$(NOECHO) $(ECHO) '   "abstract" : "unknown",' >> META_new.json
 	$(NOECHO) $(ECHO) '   "author" : [' >> META_new.json
-	$(NOECHO) $(ECHO) '      "Andrew John Dougherty <adougher9@gmail.com>"' >> META_new.json
+	$(NOECHO) $(ECHO) '      "unknown"' >> META_new.json
 	$(NOECHO) $(ECHO) '   ],' >> META_new.json
 	$(NOECHO) $(ECHO) '   "dynamic_config" : 1,' >> META_new.json
 	$(NOECHO) $(ECHO) '   "generated_by" : "ExtUtils::MakeMaker version 7.44, CPAN::Meta::Converter version 2.150010",' >> META_new.json
 	$(NOECHO) $(ECHO) '   "license" : [' >> META_new.json
-	$(NOECHO) $(ECHO) '      "gpl_3"' >> META_new.json
+	$(NOECHO) $(ECHO) '      "unknown"' >> META_new.json
 	$(NOECHO) $(ECHO) '   ],' >> META_new.json
 	$(NOECHO) $(ECHO) '   "meta-spec" : {' >> META_new.json
 	$(NOECHO) $(ECHO) '      "url" : "http://search.cpan.org/perldoc?CPAN::Meta::Spec",' >> META_new.json
 	$(NOECHO) $(ECHO) '      "version" : 2' >> META_new.json
 	$(NOECHO) $(ECHO) '   },' >> META_new.json
-	$(NOECHO) $(ECHO) '   "name" : "FRDCSA-BehaviorTree",' >> META_new.json
+	$(NOECHO) $(ECHO) '   "name" : "perl-bt",' >> META_new.json
 	$(NOECHO) $(ECHO) '   "no_index" : {' >> META_new.json
 	$(NOECHO) $(ECHO) '      "directory" : [' >> META_new.json
 	$(NOECHO) $(ECHO) '         "t",' >> META_new.json
@@ -552,18 +546,12 @@ metafile : create_distdir
 	$(NOECHO) $(ECHO) '      },' >> META_new.json
 	$(NOECHO) $(ECHO) '      "runtime" : {' >> META_new.json
 	$(NOECHO) $(ECHO) '         "requires" : {' >> META_new.json
-	$(NOECHO) $(ECHO) '            "Class::MethodMaker" : "2.24",' >> META_new.json
-	$(NOECHO) $(ECHO) '            "Data::Dumper" : "2.17"' >> META_new.json
-	$(NOECHO) $(ECHO) '         }' >> META_new.json
-	$(NOECHO) $(ECHO) '      },' >> META_new.json
-	$(NOECHO) $(ECHO) '      "test" : {' >> META_new.json
-	$(NOECHO) $(ECHO) '         "requires" : {' >> META_new.json
-	$(NOECHO) $(ECHO) '            "Test::More" : "1.001014"' >> META_new.json
+	$(NOECHO) $(ECHO) '            "Mojolicious" : "8.40"' >> META_new.json
 	$(NOECHO) $(ECHO) '         }' >> META_new.json
 	$(NOECHO) $(ECHO) '      }' >> META_new.json
 	$(NOECHO) $(ECHO) '   },' >> META_new.json
 	$(NOECHO) $(ECHO) '   "release_status" : "stable",' >> META_new.json
-	$(NOECHO) $(ECHO) '   "version" : "0",' >> META_new.json
+	$(NOECHO) $(ECHO) '   "version" : "0.01",' >> META_new.json
 	$(NOECHO) $(ECHO) '   "x_serialization_backend" : "JSON::PP version 4.04"' >> META_new.json
 	$(NOECHO) $(ECHO) '}' >> META_new.json
 	-$(NOECHO) $(MV) META_new.json $(DISTVNAME)/META.json
@@ -873,16 +861,15 @@ testdb_static :: static pure_all
 # --- MakeMaker ppd section:
 # Creates a PPD (Perl Package Description) for a binary distribution.
 ppd :
-	$(NOECHO) $(ECHO) '<SOFTPKG NAME="FRDCSA-BehaviorTree" VERSION="0">' > FRDCSA-BehaviorTree.ppd
-	$(NOECHO) $(ECHO) '    <ABSTRACT>Pure Perl Behavior Tree implementation</ABSTRACT>' >> FRDCSA-BehaviorTree.ppd
-	$(NOECHO) $(ECHO) '    <AUTHOR>Andrew John Dougherty &lt;adougher9@gmail.com&gt;</AUTHOR>' >> FRDCSA-BehaviorTree.ppd
-	$(NOECHO) $(ECHO) '    <IMPLEMENTATION>' >> FRDCSA-BehaviorTree.ppd
-	$(NOECHO) $(ECHO) '        <REQUIRE NAME="Class::MethodMaker" VERSION="2.24" />' >> FRDCSA-BehaviorTree.ppd
-	$(NOECHO) $(ECHO) '        <REQUIRE NAME="Data::Dumper" VERSION="2.17" />' >> FRDCSA-BehaviorTree.ppd
-	$(NOECHO) $(ECHO) '        <ARCHITECTURE NAME="x86_64-linux-gnu-thread-multi-5.28" />' >> FRDCSA-BehaviorTree.ppd
-	$(NOECHO) $(ECHO) '        <CODEBASE HREF="" />' >> FRDCSA-BehaviorTree.ppd
-	$(NOECHO) $(ECHO) '    </IMPLEMENTATION>' >> FRDCSA-BehaviorTree.ppd
-	$(NOECHO) $(ECHO) '</SOFTPKG>' >> FRDCSA-BehaviorTree.ppd
+	$(NOECHO) $(ECHO) '<SOFTPKG NAME="perl-bt" VERSION="0.01">' > perl-bt.ppd
+	$(NOECHO) $(ECHO) '    <ABSTRACT></ABSTRACT>' >> perl-bt.ppd
+	$(NOECHO) $(ECHO) '    <AUTHOR></AUTHOR>' >> perl-bt.ppd
+	$(NOECHO) $(ECHO) '    <IMPLEMENTATION>' >> perl-bt.ppd
+	$(NOECHO) $(ECHO) '        <REQUIRE NAME="Mojolicious::" VERSION="8.40" />' >> perl-bt.ppd
+	$(NOECHO) $(ECHO) '        <ARCHITECTURE NAME="x86_64-linux-gnu-thread-multi-5.28" />' >> perl-bt.ppd
+	$(NOECHO) $(ECHO) '        <CODEBASE HREF="" />' >> perl-bt.ppd
+	$(NOECHO) $(ECHO) '    </IMPLEMENTATION>' >> perl-bt.ppd
+	$(NOECHO) $(ECHO) '</SOFTPKG>' >> perl-bt.ppd
 
 
 # --- MakeMaker pm_to_blib section:
