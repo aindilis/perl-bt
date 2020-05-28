@@ -9,7 +9,7 @@ use Class::MethodMaker
   get_set       =>
   [
 
-   qw / Name SourceFileName Root Nodes Queue /
+   qw / Name SourceFileName Root Nodes Queue SendMessage Controller /
 
   ];
 
@@ -23,6 +23,12 @@ sub init {
   } else {
     $self->Root($args{Root});
   }
+  $self->Controller($args{Controller});
+  $self->UpdateNodes();
+}
+
+sub UpdateNodes {
+  my ($self,%args) = @_;
   $self->Nodes({});
   $self->Queue([$self->Root]);
   $self->IndexNodes();
@@ -47,7 +53,18 @@ sub IndexNodes {
 
 sub Log {
   my ($self,%args) = @_;
-  print $args{Message}."\n";
+  # print "Logging: ".$args{Message}."\n";
+  if ($args{Message}) {
+    $self->Controller->app->plan_monitor_log($self->Controller,'Log: '.$args{Message});
+  }
+}
+
+sub Update {
+  my ($self,%args) = @_;
+  # print "Updating: ".$args{Message}."\n";
+  if ($args{Update}) {
+    $self->Controller->app->plan_monitor_log($self->Controller,$args{Update});
+  }
 }
 
 sub Start {

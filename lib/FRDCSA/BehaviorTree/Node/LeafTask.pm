@@ -2,6 +2,8 @@ package FRDCSA::BehaviorTree::Node::LeafTask;
 
 use base 'FRDCSA::BehaviorTree::Node::Base';
 
+use Mojo::IOLoop;
+
 use Data::Dumper;
 
 use Class::MethodMaker
@@ -21,7 +23,7 @@ sub init {
 
 sub Tick {
   my ($self,%args) = @_;
-  $self->SUPER::Tick(%args);
+  return $self->SUPER::Tick(%args);
 }
 
 1;

@@ -13,6 +13,7 @@ lib/FRDCSA/BehaviorTree/Node/LeafTask.pm
 lib/FRDCSA/BehaviorTree/Node/Root.pm
 lib/FRDCSA/BehaviorTree/Node/Selector.pm
 lib/FRDCSA/BehaviorTree/Node/Sequence.pm
+lib/FRDCSA/BehaviorTree/Node/UserTask.pm
 lib/FRDCSA/BehaviorTree/Parser.pm
 LICENSE
 Makefile.PL
@@ -21,3 +22,4 @@ perl-bt-0.01.tar.gz
 README.md
 rebuild.sh
 t/basic.t
+upload.sh

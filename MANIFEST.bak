@@ -1,7 +1,13 @@
 behaviortree
 lib/FRDCSA/BehaviorTree.pm
+lib/FRDCSA/BehaviorTree/Blackboard.pm
+lib/FRDCSA/BehaviorTree/Blackboard/Key.pm
+lib/FRDCSA/BehaviorTree/Blackboard/KeyUpdate.pm
+lib/FRDCSA/BehaviorTree/Blackboard/StateUpdate.pm
+lib/FRDCSA/BehaviorTree/Blackboard/Watcher.pm
 lib/FRDCSA/BehaviorTree/ExecutionMonitor.pm
 lib/FRDCSA/BehaviorTree/Node.pm
+lib/FRDCSA/BehaviorTree/Node/Base.pm
 lib/FRDCSA/BehaviorTree/Node/Decorator.pm
 lib/FRDCSA/BehaviorTree/Node/LeafTask.pm
 lib/FRDCSA/BehaviorTree/Node/Root.pm
@@ -11,5 +17,7 @@ lib/FRDCSA/BehaviorTree/Parser.pm
 LICENSE
 Makefile.PL
 MANIFEST			This list of files
+perl-bt-0.01.tar.gz
 README.md
+rebuild.sh
 t/basic.t

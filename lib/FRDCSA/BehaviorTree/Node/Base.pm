@@ -67,7 +67,8 @@ sub End {
 sub Tick {
   my ($self, %args) = @_;
   $self->Status('running');
-  $self->Log(Message => 'Ticking node: '.$self->Name);
+  # this is started, so now if it's a regular task, we have to send a message to the GUI saying we've started
+  $self->Log(Message => 'Ticked: '.$self->Name);
   $self->DoAction(%args);
   return {
 	  Status => $self->Status,
@@ -84,11 +85,18 @@ sub CheckConditions {
   # to check if the node can be updated,
 }
 
+sub Update {
+  my ($self,%args) = @_;
+  $self->Tree->Update(%args);
+}
+
 sub Log {
   my ($self,%args) = @_;
   $self->Tree->Log(%args);
 }
 
+
 1;
+
 
 

@@ -197,7 +197,8 @@ TO_INST_PM = lib/FRDCSA/BehaviorTree.pm \
 	lib/FRDCSA/BehaviorTree/Node/LeafTask.pm \
 	lib/FRDCSA/BehaviorTree/Node/Root.pm \
 	lib/FRDCSA/BehaviorTree/Node/Selector.pm \
-	lib/FRDCSA/BehaviorTree/Node/Sequence.pm
+	lib/FRDCSA/BehaviorTree/Node/Sequence.pm \
+	lib/FRDCSA/BehaviorTree/Node/UserTask.pm
 
 
 # --- MakeMaker platform_constants section:
@@ -890,7 +891,8 @@ pm_to_blib : $(FIRST_MAKEFILE) $(TO_INST_PM)
 	  'lib/FRDCSA/BehaviorTree/Node/LeafTask.pm' 'blib/lib/FRDCSA/BehaviorTree/Node/LeafTask.pm' \
 	  'lib/FRDCSA/BehaviorTree/Node/Root.pm' 'blib/lib/FRDCSA/BehaviorTree/Node/Root.pm' \
 	  'lib/FRDCSA/BehaviorTree/Node/Selector.pm' 'blib/lib/FRDCSA/BehaviorTree/Node/Selector.pm' \
-	  'lib/FRDCSA/BehaviorTree/Node/Sequence.pm' 'blib/lib/FRDCSA/BehaviorTree/Node/Sequence.pm' 
+	  'lib/FRDCSA/BehaviorTree/Node/Sequence.pm' 'blib/lib/FRDCSA/BehaviorTree/Node/Sequence.pm' \
+	  'lib/FRDCSA/BehaviorTree/Node/UserTask.pm' 'blib/lib/FRDCSA/BehaviorTree/Node/UserTask.pm' 
 	$(NOECHO) $(TOUCH) pm_to_blib
 
 
