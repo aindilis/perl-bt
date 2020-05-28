@@ -1,4 +1,4 @@
-package FRDCSA::BehaviorTree::Node;
+package FRDCSA::BehaviorTree::Node::Base;
 
 use Data::Dumper;
 
@@ -9,7 +9,7 @@ use Class::MethodMaker
   get_set       =>
   [
 
-   qw / Name Description Parent Children Status /
+   qw / Name Description Tree Parent Children Status Watchers /
 
   ];
 
@@ -19,6 +19,7 @@ sub init {
   $ref =~ s/.*:://;
   $self->Name($args{Name} || $ref.'-'.rand());
   $self->Description($args{Description} || '');
+  $self->Tree($args{Tree});
   $self->Parent($args{Parent});
   $self->Children($args{Children} || []);
   $self->Status($args{Status});
@@ -27,6 +28,7 @@ sub init {
       $child->Parent($self);
     }
   }
+  $self->Watchers($args{Watchers});
 }
 
 # some comments from:
@@ -34,16 +36,6 @@ sub init {
 
 
 # As in any BT node, a CheckConditions and a DoAction functions,
-
-sub CheckConditions {
-  my ($self,%args) = @_;
-  # to check if the node can be updated,
-}
-
-sub DoAction {
-  my ($self,%args) = @_;
-  # and to actually update the node, respectively.
-}
 
 # sub Start {
 #   my ($self,%args) = @_; 
@@ -76,19 +68,25 @@ sub Tick {
   my ($self, %args) = @_;
   $self->Status('running');
   $self->Log(Message => 'Ticking node: '.$self->Name);
+  $self->DoAction(%args);
   return {
 	  Status => $self->Status,
 	 };
 }
 
-sub Log {
-  my ($self, %args) = @_;
-  print $args{Message}."\n";
+sub DoAction {
+  my ($self,%args) = @_;
+  # and to actually update the node, respectively.
 }
 
-sub NonblockingSleep {
-  my ($self, %args) = @_;
-  usleep(100);
+sub CheckConditions {
+  my ($self,%args) = @_;
+  # to check if the node can be updated,
+}
+
+sub Log {
+  my ($self,%args) = @_;
+  $self->Tree->Log(%args);
 }
 
 1;

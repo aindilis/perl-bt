@@ -1,6 +1,6 @@
 package FRDCSA::BehaviorTree::Node::Sequence;
 
-use base 'FRDCSA::BehaviorTree::Node';
+use base 'FRDCSA::BehaviorTree::Node::Base';
 
 use Data::Dumper;
 

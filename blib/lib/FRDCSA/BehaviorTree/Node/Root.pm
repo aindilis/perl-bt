@@ -1,6 +1,6 @@
 package FRDCSA::BehaviorTree::Node::Root;
 
-use base 'FRDCSA::BehaviorTree::Node';
+use base 'FRDCSA::BehaviorTree::Node::Base';
 
 use Carp::Assert;
 use Data::Dumper;

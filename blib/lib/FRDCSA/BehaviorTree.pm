@@ -1,14 +1,15 @@
 package FRDCSA::BehaviorTree;
 
+use FRDCSA::BehaviorTree::Node::Base;
+
 use Data::Dumper;
-use Mojo::IOLoop;
 
 use Class::MethodMaker
   new_with_init => 'new',
   get_set       =>
   [
 
-   qw / Name SourceFileName Root /
+   qw / Name SourceFileName Root Nodes Queue /
 
   ];
 
@@ -22,10 +23,31 @@ sub init {
   } else {
     $self->Root($args{Root});
   }
+  $self->Nodes({});
+  $self->Queue([$self->Root]);
+  $self->IndexNodes();
 }
 
 sub LoadFromSource {
   my ($self,%args) = @_;
+}
+
+sub IndexNodes {
+  my ($self,%args) = @_;
+  while (my $node = shift @{$self->Queue}) {
+    $self->Nodes->{$node->Name} = $node;
+    $node->Tree($self);
+    if (defined $node->Children) {
+      foreach my $child (@{$node->Children}) {
+	push @{$self->Queue}, $child;
+      }
+    }
+  }
+}
+
+sub Log {
+  my ($self,%args) = @_;
+  print $args{Message}."\n";
 }
 
 sub Start {

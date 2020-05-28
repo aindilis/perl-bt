@@ -187,14 +187,17 @@ PERL_ARCHIVE_AFTER =
 
 
 TO_INST_PM = lib/FRDCSA/BehaviorTree.pm \
-	lib/FRDCSA/BehaviorTree/ExecutionMonitor.pm \
-	lib/FRDCSA/BehaviorTree/Node.pm \
+	lib/FRDCSA/BehaviorTree/Blackboard.pm \
+	lib/FRDCSA/BehaviorTree/Blackboard/Key.pm \
+	lib/FRDCSA/BehaviorTree/Blackboard/KeyUpdate.pm \
+	lib/FRDCSA/BehaviorTree/Blackboard/StateUpdate.pm \
+	lib/FRDCSA/BehaviorTree/Blackboard/Watcher.pm \
+	lib/FRDCSA/BehaviorTree/Node/Base.pm \
 	lib/FRDCSA/BehaviorTree/Node/Decorator.pm \
 	lib/FRDCSA/BehaviorTree/Node/LeafTask.pm \
 	lib/FRDCSA/BehaviorTree/Node/Root.pm \
 	lib/FRDCSA/BehaviorTree/Node/Selector.pm \
-	lib/FRDCSA/BehaviorTree/Node/Sequence.pm \
-	lib/FRDCSA/BehaviorTree/Parser.pm
+	lib/FRDCSA/BehaviorTree/Node/Sequence.pm
 
 
 # --- MakeMaker platform_constants section:
@@ -877,14 +880,17 @@ ppd :
 pm_to_blib : $(FIRST_MAKEFILE) $(TO_INST_PM)
 	$(NOECHO) $(ABSPERLRUN) -MExtUtils::Install -e 'pm_to_blib({@ARGV}, '\''$(INST_LIB)/auto'\'', q[$(PM_FILTER)], '\''$(PERM_DIR)'\'')' -- \
 	  'lib/FRDCSA/BehaviorTree.pm' 'blib/lib/FRDCSA/BehaviorTree.pm' \
-	  'lib/FRDCSA/BehaviorTree/ExecutionMonitor.pm' 'blib/lib/FRDCSA/BehaviorTree/ExecutionMonitor.pm' \
-	  'lib/FRDCSA/BehaviorTree/Node.pm' 'blib/lib/FRDCSA/BehaviorTree/Node.pm' \
+	  'lib/FRDCSA/BehaviorTree/Blackboard.pm' 'blib/lib/FRDCSA/BehaviorTree/Blackboard.pm' \
+	  'lib/FRDCSA/BehaviorTree/Blackboard/Key.pm' 'blib/lib/FRDCSA/BehaviorTree/Blackboard/Key.pm' \
+	  'lib/FRDCSA/BehaviorTree/Blackboard/KeyUpdate.pm' 'blib/lib/FRDCSA/BehaviorTree/Blackboard/KeyUpdate.pm' \
+	  'lib/FRDCSA/BehaviorTree/Blackboard/StateUpdate.pm' 'blib/lib/FRDCSA/BehaviorTree/Blackboard/StateUpdate.pm' \
+	  'lib/FRDCSA/BehaviorTree/Blackboard/Watcher.pm' 'blib/lib/FRDCSA/BehaviorTree/Blackboard/Watcher.pm' \
+	  'lib/FRDCSA/BehaviorTree/Node/Base.pm' 'blib/lib/FRDCSA/BehaviorTree/Node/Base.pm' \
 	  'lib/FRDCSA/BehaviorTree/Node/Decorator.pm' 'blib/lib/FRDCSA/BehaviorTree/Node/Decorator.pm' \
 	  'lib/FRDCSA/BehaviorTree/Node/LeafTask.pm' 'blib/lib/FRDCSA/BehaviorTree/Node/LeafTask.pm' \
 	  'lib/FRDCSA/BehaviorTree/Node/Root.pm' 'blib/lib/FRDCSA/BehaviorTree/Node/Root.pm' \
 	  'lib/FRDCSA/BehaviorTree/Node/Selector.pm' 'blib/lib/FRDCSA/BehaviorTree/Node/Selector.pm' \
-	  'lib/FRDCSA/BehaviorTree/Node/Sequence.pm' 'blib/lib/FRDCSA/BehaviorTree/Node/Sequence.pm' \
-	  'lib/FRDCSA/BehaviorTree/Parser.pm' 'blib/lib/FRDCSA/BehaviorTree/Parser.pm' 
+	  'lib/FRDCSA/BehaviorTree/Node/Sequence.pm' 'blib/lib/FRDCSA/BehaviorTree/Node/Sequence.pm' 
 	$(NOECHO) $(TOUCH) pm_to_blib
 
 

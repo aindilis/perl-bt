@@ -1,6 +1,6 @@
 package FRDCSA::BehaviorTree::Node::LeafTask;
 
-use base 'FRDCSA::BehaviorTree::Node';
+use base 'FRDCSA::BehaviorTree::Node::Base';
 
 use Data::Dumper;
 
