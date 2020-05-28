@@ -19,9 +19,9 @@ sub init {
   $self->Children(undef);
 }
 
-sub Method {
+sub Tick {
   my ($self,%args) = @_;
-
+  $self->SUPER::Tick(%args);
 }
 
 1;

@@ -2,6 +2,7 @@ package FRDCSA::BehaviorTree::Node::Root;
 
 use base 'FRDCSA::BehaviorTree::Node';
 
+use Carp::Assert;
 use Data::Dumper;
 
 use Class::MethodMaker
@@ -9,17 +10,31 @@ use Class::MethodMaker
   get_set       =>
   [
 
-   qw / Attribute /
+   qw /  /
 
   ];
 
 sub init {
   my ($self,%args) = @_;
-  $self->Attribute($args{Attribute} || "");
+  $self->SUPER::init(%args);
+  assert(scalar @{$self->Children} == 1);
 }
 
-sub Method {
-  my ($self,%args) = @_;
+sub Start {
+  my ($self,%args) = @_; 
+  while ($self->Status eq 'running') {
+    $self->Children->[0]->Tick;
+    $self->NonblockingSleep();
+  }
+}
+
+sub Stop {
+  my ($self,%args) = @_; 
+  $self->Status($args{Status});
+  foreach my $child (@{$self->Children}) {
+    $child->Stop(Status => $self->Status);
+  }
 }
 
 1;
+

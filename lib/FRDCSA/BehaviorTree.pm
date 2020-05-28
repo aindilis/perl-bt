@@ -1,6 +1,7 @@
 package FRDCSA::BehaviorTree;
 
 use Data::Dumper;
+use Mojo::IOLoop;
 
 use Class::MethodMaker
   new_with_init => 'new',
@@ -25,6 +26,18 @@ sub init {
 
 sub LoadFromSource {
   my ($self,%args) = @_;
+}
+
+sub Start {
+  my ($self,%args) = @_;
+  print "Starting root node\n";
+  $self->Root->Start();
+}
+
+sub Stop {
+  my ($self,%args) = @_;
+  print "Stopping root node\n";
+  $self->Root->Stop(Status => $args{Status});
 }
 
 1;
