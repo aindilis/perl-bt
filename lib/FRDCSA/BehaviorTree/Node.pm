@@ -2,6 +2,8 @@ package FRDCSA::BehaviorTree::Node;
 
 use Data::Dumper;
 
+use Time::HiRes qw(usleep);
+
 use Class::MethodMaker
   new_with_init => 'new',
   get_set       =>
@@ -74,6 +76,9 @@ sub Tick {
   my ($self, %args) = @_;
   $self->Status('running');
   $self->Log(Message => 'Ticking node: '.$self->Name);
+  return {
+	  Status => $self->Status,
+	 };
 }
 
 sub Log {

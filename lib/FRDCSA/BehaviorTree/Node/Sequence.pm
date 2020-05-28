@@ -23,6 +23,7 @@ sub Tick {
   $self->SUPER::Tick(%args);
   foreach my $child (@{$self->Children}) {
     my $childstatus = $child->Tick();
+    print Dumper($childstatus);
     if ($childstatus->{Status} eq 'running') {
       return {
 	      Status => 'running',

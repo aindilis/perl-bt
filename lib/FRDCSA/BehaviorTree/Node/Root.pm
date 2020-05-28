@@ -22,6 +22,7 @@ sub init {
 
 sub Start {
   my ($self,%args) = @_; 
+  $self->Status($args{Status});
   while ($self->Status eq 'running') {
     $self->Children->[0]->Tick;
     $self->NonblockingSleep();

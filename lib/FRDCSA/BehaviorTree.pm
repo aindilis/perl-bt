@@ -31,7 +31,7 @@ sub LoadFromSource {
 sub Start {
   my ($self,%args) = @_;
   print "Starting root node\n";
-  $self->Root->Start();
+  $self->Root->Start(Status => 'running');
 }
 
 sub Stop {
