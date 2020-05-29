@@ -51,6 +51,21 @@ sub IndexNodes {
   }
 }
 
+sub Start {
+  my ($self,%args) = @_;
+  print "Starting root node\n";
+  $self->Root->Start(Status => 'running');
+}
+
+sub Stop {
+  my ($self,%args) = @_;
+  print "Stopping root node\n";
+  $self->Root->Stop(Status => $args{Status});
+}
+
+
+# Interaction with the GUI, should make this abstract, by passing in callbacks
+
 sub Log {
   my ($self,%args) = @_;
   # print "Logging: ".$args{Message}."\n";
@@ -65,18 +80,6 @@ sub Update {
   if ($args{Update}) {
     $self->Controller->app->plan_monitor_log($self->Controller,$args{Update});
   }
-}
-
-sub Start {
-  my ($self,%args) = @_;
-  print "Starting root node\n";
-  $self->Root->Start(Status => 'running');
-}
-
-sub Stop {
-  my ($self,%args) = @_;
-  print "Stopping root node\n";
-  $self->Root->Stop(Status => $args{Status});
 }
 
 1;

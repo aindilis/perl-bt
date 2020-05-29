@@ -6,6 +6,8 @@ use Mojo::IOLoop;
 
 use Data::Dumper;
 
+use JSON qw(to_json from_json);
+
 use Class::MethodMaker
   new_with_init => 'new',
   get_set       =>
@@ -26,7 +28,8 @@ sub Tick {
   # to proceed
 
   my $result = $self->SUPER::Tick(%args);
-  $self->Update(Update => 'JSON: Please start task: '.$self->Description);
+  $self->Update
+    (Update => 'JSON: '.to_json({Description => $self->Description, Name => $self->Name}));
   return $result;
 }
 
