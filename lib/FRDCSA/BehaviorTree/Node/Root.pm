@@ -25,7 +25,7 @@ sub Start {
   $self->Status($args{Status});
   while ($self->Status eq 'running') {
     $self->Children->[0]->Tick();
-    # $self->NonblockingWait();
+    return;
   }
 }
 
