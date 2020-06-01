@@ -1,6 +1,6 @@
 package FRDCSA::BehaviorTree::Node::Root;
 
-use base 'FRDCSA::BehaviorTree::Node::Base';
+use base 'FRDCSA::BehaviorTree::Node::Sequence';
 
 use Carp::Assert;
 use Data::Dumper;
@@ -16,25 +16,8 @@ use Class::MethodMaker
 
 sub init {
   my ($self,%args) = @_;
-  $self->SUPER::init(%args);
-  assert(scalar @{$self->Children} == 1);
-}
-
-sub Start {
-  my ($self,%args) = @_; 
-  $self->Status($args{Status});
-  while ($self->Status eq 'running') {
-    $self->Children->[0]->Tick();
-    return;
-  }
-}
-
-sub Stop {
-  my ($self,%args) = @_; 
-  $self->Status($args{Status});
-  foreach my $child (@{$self->Children}) {
-    $child->Stop(Status => $self->Status);
-  }
+  $self->FRDCSA::BehaviorTree::Node::Sequence::init(%args);
+  assert((scalar @{$self->Children}) == 1);
 }
 
 1;

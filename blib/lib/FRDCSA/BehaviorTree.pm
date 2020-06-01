@@ -1,6 +1,7 @@
 package FRDCSA::BehaviorTree;
 
-use FRDCSA::BehaviorTree::Node::Base;
+# FRDCSA::BehaviorTree::Node::Root
+# use FRDCSA::BehaviorTree::Node::Base;
 
 use Data::Dumper;
 
@@ -15,7 +16,6 @@ use Class::MethodMaker
 
 sub init {
   my ($self,%args) = @_;
-  print "What?\n";
   $self->Name($args{Name} || 'BehaviorTree-'.rand());
   $self->SourceFileName($args{SourceFileName});
   if (-f $self->SourceFileName) {
@@ -43,9 +43,15 @@ sub IndexNodes {
   while (my $node = shift @{$self->Queue}) {
     $self->Nodes->{$node->Name} = $node;
     $node->Tree($self);
-    if (defined $node->Children) {
-      foreach my $child (@{$node->Children}) {
-	push @{$self->Queue}, $child;
+    if ($node->can('Description')) {
+      print 'Indexing: '.$node->Description."\n";
+    }
+    if ($node->can('Children')) {
+      if (defined $node->Children) {
+	foreach my $child (@{$node->Children}) {
+	  push @{$self->Queue}, $child;
+	  $child->Parent($node);
+	}
       }
     }
   }
@@ -53,14 +59,21 @@ sub IndexNodes {
 
 sub Start {
   my ($self,%args) = @_;
-  print "Starting root node\n";
-  $self->Root->Start(Status => 'running');
+  print "Starting root node.\n";
+  print Dumper($self);
+  while ($self->Root->Status eq 'BH_INVALID' or $self->Root->Status eq 'BH_RUNNING') {
+    print Dumper($self->Root->Status);
+    $self->Root->Tick();
+    # Mojo::IOLoop->singleton->one_tick();
+  }
+  print "Finished root node.\n";
 }
 
 sub Stop {
   my ($self,%args) = @_;
-  print "Stopping root node\n";
-  $self->Root->Stop(Status => $args{Status});
+  print "Stopping root node.\n";
+  $self->Root->Stop();
+  print "Stopped root node.\n";
 }
 
 
@@ -74,7 +87,7 @@ sub Log {
   }
 }
 
-sub Update {
+sub SendToMojo {
   my ($self,%args) = @_;
   # print "Updating: ".$args{Message}."\n";
   if ($args{Update}) {

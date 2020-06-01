@@ -1,7 +1,9 @@
 package FRDCSA::BehaviorTree::Node::Sequence;
 
-use base 'FRDCSA::BehaviorTree::Node::Base';
+use base 'FRDCSA::BehaviorTree::Node::Composite';
+use base 'FRDCSA::BehaviorTreeStarterKit::Sequence';
 
+use Carp::Assert;
 use Data::Dumper;
 
 use Class::MethodMaker
@@ -9,34 +11,32 @@ use Class::MethodMaker
   get_set       =>
   [
 
-   qw / Children /
+   qw /  /
 
   ];
 
 sub init {
   my ($self,%args) = @_;
-  $self->SUPER::init(%args);
+  $self->FRDCSA::BehaviorTree::Node::Composite::init(%args);
+  $self->FRDCSA::BehaviorTreeStarterKit::Sequence::init(%args);
 }
 
 sub Tick {
   my ($self,%args) = @_;
-  $self->SUPER::Tick(%args);
-  foreach my $child (@{$self->Children}) {
-    my $childstatus = $child->Tick();
-    $self->Log('ChildStatus: '.Dumper($childstatus));
-    if ($childstatus->{Status} eq 'running') {
-      return {
-	      Status => 'running',
-	     };
-    } elsif ($childstatus->{Status} eq 'failure') {
-      return {
-	      Status => 'failure',
-	     };
-    }
-  }
-  return {
-	  Status => 'success',
-	 };
+  print "Sequence Tick\n";
+  $self->FRDCSA::BehaviorTree::Node::Composite::Tick();
+}
+
+sub tick {
+  my ($self,%args) = @_;
+  print "Sequence tick\n";
+  $self->FRDCSA::BehaviorTreeStarterKit::Sequence::tick();
+}
+
+sub update {
+  my ($self,%args) = @_;
+  $self->FRDCSA::BehaviorTreeStarterKit::Sequence::update();
 }
 
 1;
+

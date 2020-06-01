@@ -48,6 +48,7 @@ lib/FRDCSA/BehaviorTree/Blackboard/Watcher.pm
 lib/FRDCSA/BehaviorTree/ExecutionMonitor.pm
 lib/FRDCSA/BehaviorTree/Node.pm
 lib/FRDCSA/BehaviorTree/Node/Base.pm
+lib/FRDCSA/BehaviorTree/Node/Composite.pm
 lib/FRDCSA/BehaviorTree/Node/Decorator.pm
 lib/FRDCSA/BehaviorTree/Node/LeafTask.pm
 lib/FRDCSA/BehaviorTree/Node/Root.pm

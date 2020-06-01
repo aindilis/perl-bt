@@ -193,10 +193,8 @@ TO_INST_PM = lib/FRDCSA/BehaviorTree.pm \
 	lib/FRDCSA/BehaviorTree/Blackboard/StateUpdate.pm \
 	lib/FRDCSA/BehaviorTree/Blackboard/Watcher.pm \
 	lib/FRDCSA/BehaviorTree/Node/Base.pm \
-	lib/FRDCSA/BehaviorTree/Node/Decorator.pm \
-	lib/FRDCSA/BehaviorTree/Node/LeafTask.pm \
+	lib/FRDCSA/BehaviorTree/Node/Composite.pm \
 	lib/FRDCSA/BehaviorTree/Node/Root.pm \
-	lib/FRDCSA/BehaviorTree/Node/Selector.pm \
 	lib/FRDCSA/BehaviorTree/Node/Sequence.pm \
 	lib/FRDCSA/BehaviorTree/Node/UserTask.pm
 
@@ -887,10 +885,8 @@ pm_to_blib : $(FIRST_MAKEFILE) $(TO_INST_PM)
 	  'lib/FRDCSA/BehaviorTree/Blackboard/StateUpdate.pm' 'blib/lib/FRDCSA/BehaviorTree/Blackboard/StateUpdate.pm' \
 	  'lib/FRDCSA/BehaviorTree/Blackboard/Watcher.pm' 'blib/lib/FRDCSA/BehaviorTree/Blackboard/Watcher.pm' \
 	  'lib/FRDCSA/BehaviorTree/Node/Base.pm' 'blib/lib/FRDCSA/BehaviorTree/Node/Base.pm' \
-	  'lib/FRDCSA/BehaviorTree/Node/Decorator.pm' 'blib/lib/FRDCSA/BehaviorTree/Node/Decorator.pm' \
-	  'lib/FRDCSA/BehaviorTree/Node/LeafTask.pm' 'blib/lib/FRDCSA/BehaviorTree/Node/LeafTask.pm' \
+	  'lib/FRDCSA/BehaviorTree/Node/Composite.pm' 'blib/lib/FRDCSA/BehaviorTree/Node/Composite.pm' \
 	  'lib/FRDCSA/BehaviorTree/Node/Root.pm' 'blib/lib/FRDCSA/BehaviorTree/Node/Root.pm' \
-	  'lib/FRDCSA/BehaviorTree/Node/Selector.pm' 'blib/lib/FRDCSA/BehaviorTree/Node/Selector.pm' \
 	  'lib/FRDCSA/BehaviorTree/Node/Sequence.pm' 'blib/lib/FRDCSA/BehaviorTree/Node/Sequence.pm' \
 	  'lib/FRDCSA/BehaviorTree/Node/UserTask.pm' 'blib/lib/FRDCSA/BehaviorTree/Node/UserTask.pm' 
 	$(NOECHO) $(TOUCH) pm_to_blib

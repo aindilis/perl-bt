@@ -1,6 +1,7 @@
 package FRDCSA::BehaviorTree::Node::UserTask;
 
-use base 'FRDCSA::BehaviorTree::Node::LeafTask';
+use base 'FRDCSA::BehaviorTree::Node::Base';
+use base 'FRDCSA::BehaviorTreeStarterKit::Action';
 
 use Mojo::IOLoop;
 
@@ -19,18 +20,28 @@ use Class::MethodMaker
 
 sub init {
   my ($self,%args) = @_;
-  $self->SUPER::init(%args);
+  $self->FRDCSA::BehaviorTree::Node::Base::init(%args);
+  $self->FRDCSA::BehaviorTreeStarterKit::Action::init(%args);
 }
 
 sub Tick {
   my ($self,%args) = @_;
-  # send a message saying we've started, wait for the user to tell us
-  # to proceed
+  print "UserTask Tick\n";
+  $self->FRDCSA::BehaviorTree::Node::Base::Tick();
+}
 
-  my $result = $self->SUPER::Tick(%args);
-  $self->Update
-    (Update => 'JSON: '.to_json({Description => $self->Description, Name => $self->Name}));
-  return $result;
+sub tick {
+  my ($self,%args) = @_;
+  print "UserTask tick\n";
+  print 'Status: '.$self->Status."\n";
+  if ($self->Status eq 'BH_INVALID') {
+    $self->SendToMojo(Update => 'JSON: '.to_json({Message => 'Starting Task Node '.$self->Description, Name => $self->Name}));
+    $self->Status('BH_RUNNING');
+  } elsif ($self->Status eq 'BH_RUNNING') {
+    $self->SendToMojo(Update => 'JSON: '.to_json({Message => 'Finishing Task Node '.$self->Description, Name => $self->Name}));
+    $self->Status('BH_SUCCESS');
+  }
+  $self->FRDCSA::BehaviorTreeStarterKit::Action::tick();
 }
 
 1;
