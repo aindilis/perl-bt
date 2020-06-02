@@ -37,7 +37,7 @@ sub Status {
 sub Tick {
   my ($self, %args) = @_;
   # this is started, so now if it's a regular task, we have to send a message to the GUI saying we've started
-  $self->Log(Message => 'Ticked: '.$self->Name);
+  # $self->Log(Message => 'Ticked: '.$self->Name);
   $self->tick();
 }
 

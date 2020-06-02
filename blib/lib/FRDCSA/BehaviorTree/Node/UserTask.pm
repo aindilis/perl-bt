@@ -14,7 +14,7 @@ use Class::MethodMaker
   get_set       =>
   [
 
-   qw / /
+   qw / UserFeedback /
 
   ];
 
@@ -35,11 +35,30 @@ sub tick {
   print "UserTask tick\n";
   print 'Status: '.$self->Status."\n";
   if ($self->Status eq 'BH_INVALID') {
-    $self->SendToMojo(Update => 'JSON: '.to_json({Message => 'Starting Task Node '.$self->Description, Name => $self->Name}));
+    $self->SendToMojo(Update => 'Log: Starting Task Node '.$self->Description);
+    $self->SendToMojo(Update => 'JSON: '.to_json({Description => $self->Description, Name => $self->Name}));
+    # $self->SendToMojo(Update => 'JSON: '.to_json({Message => 'Starting Task Node '.$self->Description, Name => $self->Name}));
     $self->Status('BH_RUNNING');
+    sleep 1;
   } elsif ($self->Status eq 'BH_RUNNING') {
-    $self->SendToMojo(Update => 'JSON: '.to_json({Message => 'Finishing Task Node '.$self->Description, Name => $self->Name}));
-    $self->Status('BH_SUCCESS');
+    if (defined $self->UserFeedback) {
+      if ($self->UserFeedback->{action} eq 'update' and
+	  $self->UserFeedback->{value} eq 'done') {
+	$self->SendToMojo(Update => 'Log: Succeeded: Task Node '.$self->Description);
+    # $self->SendToMojo(Update => 'JSON: '.to_json({Message => 'Finishing Task Node '.$self->Description, Name => $self->Name}));
+	$self->Status('BH_SUCCESS');
+	$self->UserFeedback(undef);
+      } elsif ($self->UserFeedback->{action} eq 'update' and
+	       $self->UserFeedback->{value} eq 'failed') {
+	$self->SendToMojo(Update => 'Log: Failed: Task Node '.$self->Description);
+	$self->Status('BH_FAILURE');
+	$self->UserFeedback(undef);
+      } else {
+	$self->SendToMojo(Update => 'Log: Invalid Response: Task Node '.$self->Description);
+	$self->Status('BH_INVALID');
+	$self->UserFeedback(undef);
+      }
+    }
   }
   $self->FRDCSA::BehaviorTreeStarterKit::Action::tick();
 }

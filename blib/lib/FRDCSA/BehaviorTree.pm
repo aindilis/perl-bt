@@ -60,20 +60,20 @@ sub IndexNodes {
 sub Start {
   my ($self,%args) = @_;
   print "Starting root node.\n";
-  print Dumper($self);
-  while ($self->Root->Status eq 'BH_INVALID' or $self->Root->Status eq 'BH_RUNNING') {
-    print Dumper($self->Root->Status);
-    $self->Root->Tick();
-    # Mojo::IOLoop->singleton->one_tick();
-  }
-  print "Finished root node.\n";
+  # print Dumper($self);
+  # while ($self->Root->Status eq 'BH_INVALID' or $self->Root->Status eq 'BH_RUNNING') {
+  # print Dumper($self->Root->Status);
+  $self->Root->Tick();
+  # Mojo::IOLoop->singleton->one_tick();
+  # }
+  # print "Finished root node.\n";
 }
 
 sub Stop {
   my ($self,%args) = @_;
-  print "Stopping root node.\n";
-  $self->Root->Stop();
-  print "Stopped root node.\n";
+  # print "Stopping root node.\n";
+  # $self->Root->Stop();
+  # print "Stopped root node.\n";
 }
 
 
