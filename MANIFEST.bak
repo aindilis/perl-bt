@@ -56,6 +56,18 @@ lib/FRDCSA/BehaviorTree/Node/Selector.pm
 lib/FRDCSA/BehaviorTree/Node/Sequence.pm
 lib/FRDCSA/BehaviorTree/Node/UserTask.pm
 lib/FRDCSA/BehaviorTree/Parser.pm
+lib/FRDCSA/BehaviorTreePlanMonitor.pm
+lib/FRDCSA/BehaviorTreePlanMonitor/Blackboard.pm
+lib/FRDCSA/BehaviorTreePlanMonitor/Blackboard/Key.pm
+lib/FRDCSA/BehaviorTreePlanMonitor/Blackboard/KeyUpdate.pm
+lib/FRDCSA/BehaviorTreePlanMonitor/Blackboard/StateUpdate.pm
+lib/FRDCSA/BehaviorTreePlanMonitor/Blackboard/Watcher.pm
+lib/FRDCSA/BehaviorTreePlanMonitor/Node/Base.pm
+lib/FRDCSA/BehaviorTreePlanMonitor/Node/Composite.pm
+lib/FRDCSA/BehaviorTreePlanMonitor/Node/Root.pm
+lib/FRDCSA/BehaviorTreePlanMonitor/Node/Selector.pm
+lib/FRDCSA/BehaviorTreePlanMonitor/Node/Sequence.pm
+lib/FRDCSA/BehaviorTreePlanMonitor/Node/UserTask.pm
 LICENSE
 Makefile.PL
 MANIFEST			This list of files

@@ -12,7 +12,7 @@
       "url" : "http://search.cpan.org/perldoc?CPAN::Meta::Spec",
       "version" : 2
    },
-   "name" : "perl-bt",
+   "name" : "perl-btpm",
    "no_index" : {
       "directory" : [
          "t",
