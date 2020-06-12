@@ -197,7 +197,9 @@ TO_INST_PM = lib/FRDCSA/BehaviorTreePlanMonitor.pm \
 	lib/FRDCSA/BehaviorTreePlanMonitor/Node/Root.pm \
 	lib/FRDCSA/BehaviorTreePlanMonitor/Node/Selector.pm \
 	lib/FRDCSA/BehaviorTreePlanMonitor/Node/Sequence.pm \
-	lib/FRDCSA/BehaviorTreePlanMonitor/Node/UserTask.pm
+	lib/FRDCSA/BehaviorTreePlanMonitor/Node/UserTask.pm \
+	lib/FRDCSA/BehaviorTreePlanMonitor/PMParser.pm \
+	lib/FRDCSA/BehaviorTreePlanMonitor/Parser.pm
 
 
 # --- MakeMaker platform_constants section:
@@ -890,7 +892,9 @@ pm_to_blib : $(FIRST_MAKEFILE) $(TO_INST_PM)
 	  'lib/FRDCSA/BehaviorTreePlanMonitor/Node/Root.pm' 'blib/lib/FRDCSA/BehaviorTreePlanMonitor/Node/Root.pm' \
 	  'lib/FRDCSA/BehaviorTreePlanMonitor/Node/Selector.pm' 'blib/lib/FRDCSA/BehaviorTreePlanMonitor/Node/Selector.pm' \
 	  'lib/FRDCSA/BehaviorTreePlanMonitor/Node/Sequence.pm' 'blib/lib/FRDCSA/BehaviorTreePlanMonitor/Node/Sequence.pm' \
-	  'lib/FRDCSA/BehaviorTreePlanMonitor/Node/UserTask.pm' 'blib/lib/FRDCSA/BehaviorTreePlanMonitor/Node/UserTask.pm' 
+	  'lib/FRDCSA/BehaviorTreePlanMonitor/Node/UserTask.pm' 'blib/lib/FRDCSA/BehaviorTreePlanMonitor/Node/UserTask.pm' \
+	  'lib/FRDCSA/BehaviorTreePlanMonitor/PMParser.pm' 'blib/lib/FRDCSA/BehaviorTreePlanMonitor/PMParser.pm' \
+	  'lib/FRDCSA/BehaviorTreePlanMonitor/Parser.pm' 'blib/lib/FRDCSA/BehaviorTreePlanMonitor/Parser.pm' 
 	$(NOECHO) $(TOUCH) pm_to_blib
 
 

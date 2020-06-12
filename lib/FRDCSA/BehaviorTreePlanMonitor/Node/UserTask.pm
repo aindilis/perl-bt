@@ -33,6 +33,12 @@ sub Tick {
 sub tick {
   my ($self,%args) = @_;
   print "UserTask tick\n";
+  $self->FRDCSA::BehaviorTreeStarterKit::Action::tick();
+}
+
+sub update {
+  my ($self,%args) = @_;
+  print "UserTask update\n";
   print 'Status: '.$self->Status."\n";
   if ($self->Status eq 'BH_INVALID') {
     $self->SendToMojo(Update => 'Log: Starting Task Node '.$self->Description);
@@ -60,7 +66,7 @@ sub tick {
       }
     }
   }
-  $self->FRDCSA::BehaviorTreeStarterKit::Action::tick();
+  $self->FRDCSA::BehaviorTreeStarterKit::Action::update();
 }
 
 1;
