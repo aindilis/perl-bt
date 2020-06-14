@@ -69,6 +69,7 @@ lib/FRDCSA/BehaviorTreePlanMonitor/Node/Selector.pm
 lib/FRDCSA/BehaviorTreePlanMonitor/Node/Sequence.pm
 lib/FRDCSA/BehaviorTreePlanMonitor/Node/UserTask.pm
 lib/FRDCSA/BehaviorTreePlanMonitor/Parser.pm
+lib/FRDCSA/BehaviorTreePlanMonitor/Parser/FirstPass.pm
 lib/FRDCSA/BehaviorTreePlanMonitor/PMParser.pm
 LICENSE
 Makefile.PL

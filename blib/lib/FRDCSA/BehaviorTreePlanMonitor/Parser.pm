@@ -1,6 +1,6 @@
 package FRDCSA::BehaviorTreePlanMonitor::Parser;
 
-use FRDCSA::BehaviorTreePlanMonitor::PMParser;
+use FRDCSA::BehaviorTreePlanMonitor::Parser::FirstPass;
 
 use Data::Dumper;
 use File::Slurp;
@@ -10,7 +10,7 @@ use Class::MethodMaker
   get_set       =>
   [
 
-   qw / /
+   qw / Clauses TaskNodes NonRootNodes RootNodes /
 
   ];
 
@@ -43,14 +43,18 @@ sub Parse {
   if (defined $allcontents and (length($allcontents) > 0)) {
     my $res1 = $self->ParseAllContents(AllContents => $allcontents);
     if ($res1->{Success}) {
-      my $bt = FRDCSA::BehaviorTreePlanMonitor->new
-	(
-	 Blackboard => FRDCSA::BehaviorTreePlanMonitor::Blackboard->new(),
-	 Root => $res1->{RootNode},
-	);
+      my $behaviortrees = {};
+      foreach my $key (keys %{$res1->{RootNodes}}) {
+	$behaviortrees->{$key} = FRDCSA::BehaviorTreePlanMonitor->new
+	  (
+	   Name => $key,
+	   Blackboard => FRDCSA::BehaviorTreePlanMonitor::Blackboard->new(),
+	   Root => $res1->{RootNodes}->{$key},
+	  );
+      }
       return {
 	      Success => 1,
-	      BehaviorTree => $bt
+	      BehaviorTrees => $behaviortrees,
 	     };
     }
   }
@@ -61,9 +65,72 @@ sub Parse {
 
 sub ParseAllContents {
   my ($self,%args) = @_;
-  my $pmparser = FRDCSA::BehaviorTreePlanMonitor::PMParser->new;
+
+  my $firstpass = FRDCSA::BehaviorTreePlanMonitor::Parser::FirstPass->new;
   print '<<<'.$args{AllContents}.">>>\n";
-  return $pmparser->from_string( $args{AllContents} );
+  my $res1 =  $firstpass->from_string( $args{AllContents} );
+  if (! $res1->{Success}) {
+    # throw error;
+    die "Whoops!\n";
+  }
+  my $clauses = $res1->{Clauses};
+  my $tasknodes = {};
+  my $nonrootnodes = {};
+  foreach my $clause (values %$clauses) {
+    foreach my $conjunct (@{$clause->{Body}}) {
+      if (! exists $clauses->{$conjunct}) {
+	$tasknodes->{$conjunct} = 1;
+      } else {
+	$nonrootnodes->{$conjunct} = 1;
+      }
+    }
+  }
+  $self->Clauses($clauses);
+  $self->TaskNodes($tasknodes);
+  $self->NonRootNodes($nonrootnodes);
+  $self->RootNodes($rootnodes);
+  my $rootnodes = {};
+  foreach my $clause (keys %$clauses) {
+    next if $nonrootnodes->{$clause};
+    $rootnodes->{$clause} = $self->BuildBehaviorSubTree(Node => $clause);
+  }
+  return
+    {
+     Success => 1,
+     RootNodes => $rootnodes,
+    };
+}
+
+sub BuildBehaviorSubTree {
+  my ($self,%args) = @_;
+  print "BuildBehaviorSubTree: $args{Node}\n";
+  my @children;
+  foreach my $conjunct (@{$self->Clauses->{$args{Node}}->{Body}}) {
+    if (exists $self->TaskNodes->{$conjunct}) {
+      push @children,
+	FRDCSA::BehaviorTreePlanMonitor::Node::UserTask->new
+	  (Description => $self->PresentText(Text => $conjunct));
+    } else {
+      push @children,
+	$self->BuildBehaviorSubTree(Node => $conjunct);
+    }
+  }
+  if (defined $self->Clauses->{$args{Node}}->{Operator}) {
+    my $op = $self->Clauses->{$args{Node}}->{Operator};
+    if ($op eq '->') {
+      return FRDCSA::BehaviorTreePlanMonitor::Node::Sequence->new(Children => \@children);
+    } elsif ($op eq '>>') {
+      return FRDCSA::BehaviorTreePlanMonitor::Node::Selector->new(Children => \@children);
+    }
+  }
+  die "Oops!\n".Dumper({Children => \@children});
+}
+
+sub PresentText {
+  my ($self,%args) = @_;
+  my $text = ucfirst($args{Text});
+  $text =~ s/_/ /sg;
+  return $text;
 }
 
 1;
