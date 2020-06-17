@@ -66,7 +66,10 @@ sub Parse {
 sub ParseAllContents {
   my ($self,%args) = @_;
 
-  my $firstpass = FRDCSA::BehaviorTreePlanMonitor::Parser::FirstPass->new;
+  my $firstpass = FRDCSA::BehaviorTreePlanMonitor::Parser::FirstPass->new
+    (
+     patterns => { comment => qr/\%.*\n/ },
+    );
   print '<<<'.$args{AllContents}.">>>\n";
   my $res1 =  $firstpass->from_string( $args{AllContents} );
   if (! $res1->{Success}) {
