@@ -51,6 +51,15 @@ sub Log {
   $self->Tree->Log(%args);
 }
 
+sub GetPath {
+  my ($self,%args) = @_;
+  my $type = ref($self);
+  if (defined $self->Parent) {
+    return [@{$self->Parent->GetPath()},$self->Description];
+  }
+  return [$self->Description];
+}
+
 1;
 
 

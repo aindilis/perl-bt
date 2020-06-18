@@ -42,7 +42,9 @@ sub update {
   print 'Status: '.$self->Status."\n";
   if ($self->Status eq 'BH_INVALID') {
     $self->SendToMojo(Update => 'Log: Starting Task Node '.$self->Description);
-    $self->SendToMojo(Update => 'JSON: '.to_json({Description => $self->Description, Name => $self->Name}));
+    my $path = $self->GetPath;
+    print Dumper({Path => $path});
+    $self->SendToMojo(Update => 'JSON: '.to_json({Description => $self->Description, Name => $self->Name, Path => $path}));
     # $self->SendToMojo(Update => 'JSON: '.to_json({Message => 'Starting Task Node '.$self->Description, Name => $self->Name}));
     $self->Status('BH_RUNNING');
     sleep 1;

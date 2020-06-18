@@ -120,10 +120,20 @@ sub BuildBehaviorSubTree {
   }
   if (defined $self->Clauses->{$args{Node}}->{Operator}) {
     my $op = $self->Clauses->{$args{Node}}->{Operator};
+    my $description = $self->PresentText(Text => $self->Clauses->{$args{Node}}->{Head});
+    print "Description: $description\n";
     if ($op eq '->') {
-      return FRDCSA::BehaviorTreePlanMonitor::Node::Sequence->new(Children => \@children);
+      return FRDCSA::BehaviorTreePlanMonitor::Node::Sequence->new
+	(
+	 Description => $description,
+	 Children => \@children,
+	);
     } elsif ($op eq '>>') {
-      return FRDCSA::BehaviorTreePlanMonitor::Node::Selector->new(Children => \@children);
+      return FRDCSA::BehaviorTreePlanMonitor::Node::Selector->new
+	(
+	 Description => $description,
+	 Children => \@children,
+	);
     }
   }
   die "Oops!\n".Dumper({Children => \@children});

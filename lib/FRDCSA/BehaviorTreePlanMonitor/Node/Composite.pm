@@ -20,8 +20,8 @@ sub init {
   my $ref = ref($self);
   print "$ref\n";
   $self->Children($args{Children} || []);
-  $self->FRDCSA::BehaviorTreePlanMonitor::Node::Base::init();
-  $self->FRDCSA::BehaviorTreeStarterKit::Composite::init();
+  $self->FRDCSA::BehaviorTreePlanMonitor::Node::Base::init(%args);
+  $self->FRDCSA::BehaviorTreeStarterKit::Composite::init(%args);
   print "finish init composite\n";
 }
 
